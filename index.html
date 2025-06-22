@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Sunucu Bilgisi</title>
+    <link rel="icon" href="data:," type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+            <span class="toggle-ball"></span>
+        </div>
+
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-server"></i>
+                    <h1>MC Status</h1>
+                </div>
+                <p class="subtitle">Gerçek zamanlı Minecraft sunucu istatistikleri</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="search-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="server-ip" placeholder="Sunucu IP'si (örn: play.example.com)" autocomplete="off">
+                        <button id="search-btn" class="search-button">
+                            <i class="fas fa-search"></i> Ara
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-section">
+                <div class="loading-indicator" id="loading">
+                    <div class="spinner-container">
+                        <div class="spinner"></div>
+                    </div>
+                    <p>Sunucu bilgileri alınıyor...</p>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+
+                <div class="error-message" id="error">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Sunucu bulunamadı</h3>
+                    <p>Lütfen IP adresini kontrol edip tekrar deneyin</p>
+                    <div class="error-actions">
+                        <button class="retry-button" id="retry-btn">
+                            <i class="fas fa-sync-alt"></i> Tekrar Dene
+                        </button>
+                    </div>
+                </div>
+
+                <div class="discord-embed" id="embed">
+                    <div class="embed-color-bar"></div>
+                    <div class="embed-content">
+                        <div class="embed-header">
+                            <div class="embed-icon-container">
+                                <img class="embed-icon" id="server-icon" alt="Server Icon">
+                                <div class="online-status" id="status-badge">
+                                    <span class="status-indicator"></span>
+                                    <span class="status-text">Durum</span>
+                                </div>
+                            </div>
+                            <div class="embed-title-container">
+                                <h3 class="embed-title" id="server-name">Sunucu Adı</h3>
+                                <div class="embed-meta">
+                                    <span class="meta-item">
+                                        <i class="fas fa-globe"></i>
+                                        <span id="server-ip-address">IP Adresi</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span id="timestamp">Zaman</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="embed-banner-container">
+                            <img class="embed-banner" id="server-banner" alt="Server Banner">
+                            <div class="banner-overlay">
+                                <div class="players-count" id="players-count">
+                                    <i class="fas fa-users"></i>
+                                    <span>0</span>
+                                </div>
+                                <div class="version-badge" id="version-badge">
+                                    <i class="fas fa-code-branch"></i>
+                                    <span>Versiyon</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="embed-fields">
+                            <div class="embed-field">
+                                <div class="field-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="field-content">
+                                    <div class="field-title">Oyuncu Durumu</div>
+                                    <div class="field-value" id="server-players">
+                                        <div class="players-progress">
+                                            <div class="progress-fill" style="width: 0%"></div>
+                                        </div>
+                                        <div class="players-text">0/0</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="embed-field">
+                                <div class="field-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="field-content">
+                                    <div class="field-title">Sunucu Bilgisi</div>
+                                    <div class="field-value motd" id="server-info"></div>
+                                </div>
+                            </div>
+
+                            <div class="embed-field">
+                                <div class="field-icon">
+                                    <i class="fas fa-network-wired"></i>
+                                </div>
+                                <div class="field-content">
+                                    <div class="field-title">Ağ Durumu</div>
+                                    <div class="field-value">
+                                        <div class="network-info">
+                                            <span class="network-item">
+                                                <i class="fas fa-shield-alt"></i>
+                                                <span id="server-protocol">Protokol: -</span>
+                                            </span>
+                                            <span class="network-item">
+                                                <i class="fas fa-plug"></i>
+                                                <span id="server-port">Port: 25565</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="embed-footer">
+                            <div class="footer-content">
+                                <span class="footer-text">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span id="last-updated">Son güncelleme: -</span> <small><i>coded by <a href="https://github.com/LWEAXO" target="_blank" style="color:inherit;text-decoration:none">lweaxo</a></i></small>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
