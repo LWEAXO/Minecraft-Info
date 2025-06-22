@@ -174,22 +174,20 @@ document.addEventListener('DOMContentLoaded', function() {
         playersText.textContent = `${online.toLocaleString()}/${max.toLocaleString()}`;
         playersCount.textContent = online.toLocaleString();
         
-        serverVersion.textContent = data.version;
+        serverVersion.textContent = data.sayısal_ip || "veri alınamadı!"
         serverProtocol.textContent = `Protokol: ${data.protocol}`;
         serverPort.textContent = `Port: ${data.port}`;
 
-        serverInfo.innerHTML = `
-        <div class="network-info">
-            <div class="network-item">
-                <span class="network-label">
-                    <span class="info-item" style="color: #4fc3f7">Sayısal IP:</span> ${data.sayısal_ip || "veri alınamadı!"}
-                    <span class="info-item" style="color: #4fc3f7">Domain:</span> ${data.hostname||ip.split(':')[0]}
-                    <span class="info-item" style="color: #4fc3f7">Oyuncu:</span> <span style="color: #69f0ae">${data.players.online||0}</span>/<span style="color: #ff5252">${data.players.max||0}</span>
-                    <span class="info-item" style="color: #4fc3f7">Port:</span> ${data.port||(ip.includes(':')?ip.split(':')[1]:25565)}
-                </span>
-            </div>
-        </div>`;
-    }
+serverInfo.innerHTML = `
+<div class="network-info"><div class="network-item"><span class="network-label">
+      <span class="info-item" style="color: #4fc3f7">Sayısal IP:</span> ${data.sayısal_ip || "veri alınamadı!"}
+      <span class="info-item" style="color: #4fc3f7">Domain:</span> ${data.hostname||ip.split(':')[0]}
+      <span class="info-item" style="color: #4fc3f7">Oyuncu:</span> <span style="color: #69f0ae">${data.players.online||0}</span>/<span style="color: #ff5252">${data.players.max||0}</span>
+      <span class="info-item" style="color: #4fc3f7">Port:</span> ${data.port||(ip.includes(':')?ip.split(':')[1]:25565)}
+    </span>
+  </div>
+</div>`;
+  }
 
     function updateTimestamps() {
         const now = new Date();
