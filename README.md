@@ -27,7 +27,7 @@
 
 ## 🌐 Canlı Demo
 
-Projeyi test etmek için: [**Canlı Bağlantı**](link)
+Projeyi test etmek için: [**Canlı Bağlantı**](https://minecraft-info-site.vercel.app/)
 
 ## 🤝 Katkıda Bulunma
 
